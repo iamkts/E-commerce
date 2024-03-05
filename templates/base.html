@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>MYSHOP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Neuton:ital,wght@0,200;0,300;0,400;0,700;0,800;1,400&display=swap"
+        rel="stylesheet">
+    <!--    icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <header>
+        <center>
+            <img src="{% static 'images/shopit_logo.png'%}" height="100px" width="100px">
+            <nav class="navbar navbar-expand-lg navbar-dark ">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/">Fradel & Spies</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="{% url 'shop:allcat' %}">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <!--                                <a class="nav-link" href="#">Products</a>-->
+                            </li>
+                            {% if user.is_authenticated %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    All-Categories
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    {% for i in links %}
+                                    <li><a class="dropdown-item"
+                                            href="{% url 'shop:productdetail' i.name %}">{{i.name}}</a></li>
+                                    {% endfor %}
+
+                                    <hr class="dropdown-divider">
+
+                                    <!--                                    <li><a class="dropdown-item" href="#">Others</a></li>-->
+                                </ul>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link " href="{% url 'shop:logout' %}" tabindex="-1" aria-disabled="true">logout</a>
+                            </li>
+                             <li class="nav-item">
+                                <a class="nav-link " href="{% url 'cart:cartview' %}"><i class="fa-solid fa-cart-shopping"></i><sup class="ms-2">{{count}}</sup></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="{% url 'cart:orderview' %}">Your Orders</a>
+                            </li>
+                            {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link " href="{% url 'shop:register' %}" tabindex="-1" aria-disabled="true">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " href="{% url 'shop:user_login' %}" tabindex="-1" aria-disabled="true">login</a>
+
+                            </li>
+                            {% endif %}
+
+                        </ul>
+                        <form class="d-flex"   method="POST" action="{% url 'search:search' %}">
+                        {% csrf_token %}
+                            <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+
+                    </div>
+                </div>
+            </nav>
+
+        </center>
+    </header>
+    <div>
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p>&copy; 2024 Fradel & Spies Pvt ltd. All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    </div>
+</body>
+
+</html>

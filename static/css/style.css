@@ -1,0 +1,31 @@
+body {
+    background-color:#897E76;
+    font-family: "Neuton", serif;
+    font-weight: 300;
+    font-style: normal;
+    margin: 0;
+}
+
+.navbar {
+    background-color: #252525;
+    color:white;
+    padding: 10px;
+    margin: 0 5px;
+    font-weight: bold;
+    font-style: normal;
+}
+
+.footer {
+    background-color: #252525;
+    padding: 20px 0;
+    color: white;
+    text-align: center;
+    position:fixed;
+    bottom: 0;
+    width: 100%;
+}
+.btn-success {
+    color: #fff;
+    background-color: #272727;
+    border-color: #272727;
+}

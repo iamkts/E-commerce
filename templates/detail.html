@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-5" style="margin-bottom :100px;">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{{ p.image.url }}" style="height: 400px; width: 400px;" alt="{{ p.name }}">
+        </div>
+        <div class="col-md-6">
+            <div class="choco">
+                <h3>{{ p.name }}</h3>
+                <p>{{ p.desc }}</p>
+                <h5>stock<br>{{ p.stock }}</h5>
+                <h3>Price  <br>₹ {{p.price}}</h3>
+            </div>
+            <div>
+                <a href="{% url 'cart:cart' p.name %}" class="btn btn-success d-block mx-auto">Add to cart</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+</body>
+</html>

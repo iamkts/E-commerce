@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <div>
+    <img src="{% static 'images/bannerimg.png'%}" width="100%">
+  </div>
+  <div class="container-fluid mt-3" style="margin-bottom: 100px;">
+    <h1 class="text-center fw-bold" style="color:white;">'Behind the Brand'</h1>
+    <p style="text-align: justify; line-height: 2; color:white;">
+      Welcome to Shop It, your ultimate online destination for a seamless and delightful shopping experience! At Shop It, we bring you a curated selection of the latest trends, premium products, and must-have items, all conveniently at your fingertips. Discover a world of fashion, electronics, home decor, beauty essentials, and much more, all thoughtfully organized to make your shopping journey effortless. Our user-friendly interface ensures that you can easily navigate through a diverse range of categories, finding exactly what you need with just a few clicks. Embrace the joy of online shopping with Shop It's secure and hassle-free checkout process. We prioritize your privacy and security, providing a safe environment for you to explore, select, and purchase your favorite items. Our streamlined order tracking and quick delivery options ensure that your purchases reach you promptly and in pristine condition. Engage with our vibrant community through product reviews, ratings, and recommendations, making informed decisions and staying connected with the latest trends. Explore exclusive deals, discounts, and seasonal offers that make every purchase on Shop It a rewarding experience. Whether you're searching for the perfect outfit, upgrading your tech gadgets, or enhancing your living space, Shop It is here to cater to your every need. Elevate your online shopping experience with Shop It – where style, convenience, and affordability converge to create an unparalleled digital marketplace. Shop It, your one-stop destination for all things fabulous!
+    </p>
+  </div>
+  <div class="container-fluid" style="margin-bottom: 180px;">
+    <div class="row justify-content-center">
+      {% for i in c %}
+        <div class="col-sm-4 mb-4">
+          <div class="card mx-auto">
+            <img src="{{ i.images.url }}" height="200px" width="50%" class="card-img-top" alt="">
+            <div class="card-body">
+              <h5 class="card-title text-center">{{ i.name }}</h5>
+              <a href="{% url 'shop:productdetail' i.name %}" class="btn btn-success d-block mx-auto">Products</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+{% endblock %}
